@@ -10,3 +10,6 @@
 [submodule "web"]
         path = web
         url = git://github.com/cocos2d/cocos2d-html5.git
+[submodule "external/spidermonkey"]
+	path = external/spidermonkey
+	url = git@bitbucket.org:hashcube/spidermonkey.git
