@@ -35,12 +35,20 @@ using namespace cocos2d;
 extern "C" {
     JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxRenderer_nativeTouchesBegin(JNIEnv * env, jobject thiz, jint id, jfloat x, jfloat y) {
         intptr_t idlong = id;
-        cocos2d::Director::getInstance()->getOpenGLView()->handleTouchesBegin(1, &idlong, &x, &y);
+        GLView* glView = cocos2d::Director::getInstance()->getOpenGLView();
+
+        if (glView) {
+            glView->handleTouchesBegin(1, &idlong, &x, &y);
+        }
     }
 
     JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxRenderer_nativeTouchesEnd(JNIEnv * env, jobject thiz, jint id, jfloat x, jfloat y) {
         intptr_t idlong = id;
-        cocos2d::Director::getInstance()->getOpenGLView()->handleTouchesEnd(1, &idlong, &x, &y);
+        GLView* glView = cocos2d::Director::getInstance()->getOpenGLView();
+
+        if (glView) {
+            glView->handleTouchesEnd(1, &idlong, &x, &y);
+        }
     }
 
     JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxRenderer_nativeTouchesMove(JNIEnv * env, jobject thiz, jintArray ids, jfloatArray xs, jfloatArray ys) {
@@ -57,7 +65,11 @@ extern "C" {
         for(int i = 0; i < size; i++)
             idlong[i] = id[i];
 
-        cocos2d::Director::getInstance()->getOpenGLView()->handleTouchesMove(size, idlong, x, y);
+        GLView* glView = cocos2d::Director::getInstance()->getOpenGLView();
+
+        if (glView) {
+            glView->handleTouchesMove(size, idlong, x, y);
+        }
     }
 
     JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxRenderer_nativeTouchesCancel(JNIEnv * env, jobject thiz, jintArray ids, jfloatArray xs, jfloatArray ys) {
@@ -74,7 +86,11 @@ extern "C" {
         for(int i = 0; i < size; i++)
             idlong[i] = id[i];
 
-        cocos2d::Director::getInstance()->getOpenGLView()->handleTouchesCancel(size, idlong, x, y);
+        GLView* glView = cocos2d::Director::getInstance()->getOpenGLView();
+
+        if (glView) {
+            glView->handleTouchesCancel(size, idlong, x, y);
+        }
     }
 
 #define KEYCODE_BACK 0x04
